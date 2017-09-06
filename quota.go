@@ -6,7 +6,18 @@ import (
 	api "github.com/codedellemc/goisilon/api/v1"
 )
 
+type QuotaList []*api.IsiQuota
 type Quota *api.IsiQuota
+
+// GetQuotas returns a list with all quotas
+func (c *Client) GetQuotas(ctx context.Context) (QuotaList, error) {
+	quotas, err := api.GetIsiQuotas(ctx, c.API)
+	if err != nil {
+		return nil, err
+	}
+
+	return quotas.QuotaList, nil
+}
 
 // GetQuota returns a specific quota by path
 func (c *Client) GetQuota(ctx context.Context, name string) (Quota, error) {

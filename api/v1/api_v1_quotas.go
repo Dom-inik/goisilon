@@ -8,6 +8,18 @@ import (
 	"golang.org/x/net/context"
 )
 
+// GetIsiQuotas queries a list of all quotas on the cluster
+func GetIsiQuotas(
+	ctx context.Context,
+	client api.Client) (resp *getIsiQuotaListResp, err error) {
+	// PAPI call: GET https://1.2.3.4:8080/platform/1/quota/quotas
+	err = client.Get(ctx, quotaPath, "", nil, nil, &resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 // GetIsiQuota queries the quota for a directory
 func GetIsiQuota(
 	ctx context.Context,

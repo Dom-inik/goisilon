@@ -154,3 +154,8 @@ type IsiUpdateQuotaReq struct {
 type isiQuotaListResp struct {
 	Quotas []IsiQuota `json:"quotas"`
 }
+
+type getIsiQuotaListResp struct {
+	QuotaList []*IsiQuota `json:"quotas"`
+	Resume    string      `json:"resume"`
+}
